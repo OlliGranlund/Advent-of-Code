@@ -28,10 +28,14 @@ for (let i = 0; i < inputAsArray.length; i++){
     // add playing "weapon" round score
     sum = addToSum(sum, roundValues[1]);
 
+    // A X // rock
+    // B Y // paper
+    // C Z // scissors
+
     // winnings
-    const win = ['B X', 'A Z', 'C Y'];
+    const win = ['C X', 'B Z', 'A Z'];
     const tie = ['A X', 'B Y', 'C Z'];
-    //const lose = ['C X', 'B Z', 'A Y']; // not necessary but left for clarification
+    //const lose = ['B X', 'C Y', 'A Z']; // not necessary but left for clarification
 
     if( win.includes(inputAsArray[i]) ){
         // you win the round
