@@ -24,11 +24,7 @@ function addToSum( sum, player){
 for (let i = 0; i < inputAsArray.length; i++){
 
     const roundValues = inputAsArray[i].split(' ');
-
-    if( sum < 1000 ){
-        console.log(sum);
-    }
-
+    
     // add playing "weapon" round score
     sum = addToSum(sum, roundValues[0]);
 
