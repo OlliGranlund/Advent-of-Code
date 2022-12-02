@@ -6,17 +6,17 @@ let sum = 0;
 
 function addToSum( sum, player){
     // rock
-    if( player === 'A'){
+    if( player === 'X'){
         return sum + 1;
     }
 
     // paper
-    if( player === 'B'){
+    if( player === 'Y'){
         return sum + 2;
     }
 
     // scissors
-    //if( player === 'C'){
+    //if( player === 'Z'){
         return sum + 3
     //}
 }
@@ -24,14 +24,14 @@ function addToSum( sum, player){
 for (let i = 0; i < inputAsArray.length; i++){
 
     const roundValues = inputAsArray[i].split(' ');
-    
+
     // add playing "weapon" round score
-    sum = addToSum(sum, roundValues[0]);
+    sum = addToSum(sum, roundValues[1]);
 
     // winnings
-    const win = ['B Y', 'C X', 'A Z'];
-    const tie = ['A Y', 'B X', 'C Z'];
-    //const lose = ['A X', 'B Z', 'C Y']; // not necessary but left for clarification
+    const win = ['B X', 'A Z', 'C Y'];
+    const tie = ['A X', 'B Y', 'C Z'];
+    //const lose = ['C X', 'B Z', 'A Y']; // not necessary but left for clarification
 
     if( win.includes(inputAsArray[i]) ){
         // you win the round
