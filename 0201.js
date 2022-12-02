@@ -32,7 +32,7 @@ for (let i = 0; i < inputAsArray.length; i++){
     // B Y // paper
     // C Z // scissors
 
-    const win = ['C X', 'B Z', 'A Z'];
+    const win = ['C X', 'B Z', 'A Y'];
     const tie = ['A X', 'B Y', 'C Z'];
     //const lose = ['B X', 'C Y', 'A Z']; // not necessary but left for clarification
 
