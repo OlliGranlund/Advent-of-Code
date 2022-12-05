@@ -1,38 +1,46 @@
 const fs = require('fs');
 const input = fs.readFileSync('input/05.txt', 'utf8');
-const inputAsArray = input.split(/\n/);
 
+let startOrder = [];
 let arrays = [];
 
-// Setup arrays
-/*
-const startOrder = [
-    'NZ',
-    'DCM',
-    'P',
-];
-*/
+// Transform data into workable format
+const splitInput = input.split(/[\r\n]{2,}/);
+const startPoint = splitInput[0];
+const tasks = splitInput[1];
 
-const startOrder = [
-    'GPNR',
-    'HVSCLBJT',
-    'LNMBDT',
-    'BSPVR',
-    'HVMWSQCG',
-    'JBDCSQW',
-    'LQF',
-    'VFLDTHMW',
-    'FJMVBPL',
-];
+const splitStartPoint = startPoint.split(/\n/).reverse();
+const startPointKeys = splitStartPoint[0];
+const startPointValues = splitStartPoint.slice(1);
+const splitStartPointKeys = startPointKeys.split('');
 
+// Start to iterate by mapping character index per row basis
+for (let i = 0; i < splitStartPointKeys.length; i++){
+    if( splitStartPointKeys[i] !== ' ' ){
+        const arrayKey = parseInt( splitStartPointKeys[i] ) - 1;
+
+        for (let v = 0; v < startPointValues.length; v++){
+            const splitStartPointValues = startPointValues[v].split('');
+            if( /[a-z]/i.test(splitStartPointValues[i]) ){
+                const previousValue = startOrder[arrayKey] ? startOrder[arrayKey] : '';
+                startOrder[arrayKey] = splitStartPointValues[i] + previousValue;
+            }
+        }
+    }
+}
+
+// Turn strings to arrays
 for (let i = 0; i < startOrder.length; i++){
     const rowValues = startOrder[i].replace(/(\r\n|\n|\r)/gm, "").split('');
     arrays.push( rowValues );
 }
 
+// Prepare tasks
+const tasksAsArray = tasks.split(/\n/);
+
 // Handle moves
-for (let i = 0; i < inputAsArray.length; i++){
-    const rowValue = inputAsArray[i].replace(/(\r\n|\n|\r)/gm, "");
+for (let i = 0; i < tasksAsArray.length; i++){
+    const rowValue = tasksAsArray[i].replace(/(\r\n|\n|\r)/gm, "");
     const simplifiedValues = rowValue.replace('move ', '').replace(' from ', '-').replace(' to ', '-').split('-');
     const move  = parseInt( simplifiedValues[0] );
     const from  = parseInt( simplifiedValues[1] );
