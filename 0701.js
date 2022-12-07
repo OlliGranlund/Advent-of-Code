@@ -43,34 +43,36 @@ function addToTree( tree, currentDepth, targetName, targetValue ){
     return set(tree, fixedDepth, targetValue);
 }
 
-function getDirSizes( tree, dirs = [], dir ){
+function getDirSizes( tree, dirs = {}, dir, parentDir ){
+
+    if( parentDir === dir ){
+        parentDir = '';
+    }
+
+    let parentPrefix = '';
+
+    if( parentDir !== dir && parentDir !== '' ){
+        parentPrefix = parentDir + '__';
+    }
 
     Object.keys(tree).forEach(part => {
 
         if( typeof tree[part] === 'number' ){
-
-
-            if( dirs[dir] ){
-                dirs[dir] = dirs[dir] + tree[part];
+            if( dirs[parentPrefix + dir] ){
+                dirs[parentPrefix + dir] = dirs[parentPrefix + dir] + tree[part];
             } else {
-                dirs[dir] = tree[part];
+                dirs[parentPrefix + dir] = tree[part];
             }
         } else {
             if( dir !== part){
-                const partDirs = getDirSizes( tree[part], dirs, part );
-                const dirValue = partDirs[part];
-
-                if( dirs[dir] ){
-                    dirs[dir] = dirs[dir] + dirValue;
-                } else {
-                    dirs[dir] = dirValue;
-                }
-            } else  {
-                dirs = getDirSizes( tree[part], dirs, dir );
+                dirs = {...dirs, ...getDirSizes( tree[part], dirs, part, dir )};
+            } else if( dir === part ) {
+                dirs = {...dirs, ...getDirSizes( tree[part], dirs, dir, dir )};
+            } else {
+                // fail silently
             }
         }
     });
-
 
     return dirs;
 }
@@ -112,7 +114,10 @@ for (let i = 0; i < inputAsArray.length; i++){
     }
 }
 
-const dirSizes = getDirSizes( tree, [], '/' );
+const dirSizes = getDirSizes( tree, {}, '/', '' );
+
+// console.log( tree );
+// console.log( dirSizes );
 
 let MaxValue = Object.values(dirSizes).sort((a,b) => a-b).reverse().filter((val) => val > 100000 ? false : true ).reduce(
     (accumulator, currentValue) => accumulator + currentValue,
