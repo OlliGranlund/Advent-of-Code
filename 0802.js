@@ -8,7 +8,7 @@ for (var i = 0; i < matrix.length; i++) {
     matrix[i] = matrix[i].split('');
 }
 
-let scenicMatrix = matrix;
+let scenicMatrix = JSON.parse(JSON.stringify(matrix));
 
 const rowsCount = matrix.length - 1;
 const colsCount = matrix[0].length - 1;
@@ -44,35 +44,16 @@ for (var row = 0; row < matrix.length; row++) {
             for (let i = 0; i < comparables.length; i++) {
                 if( currentValue > comparables[i] ){
                     scenicTop++;
+                } else if( currentValue === comparables[i] ){
+                    scenicTop++;
+                    break;
                 } else {
+                    scenicTop++;
                     break;
                 }
             }
 
             scenicScore.push( scenicTop );
-
-        } else {
-            scenicScore.push(0);
-        }
-
-        if( bottomCountable > 0 ){
-            comparables = [];
-
-            for (let i = row + 1; i <= row + bottomCountable; i++) {
-                comparables.push( parseInt( matrix[i][column] ) );
-            }
-
-            let scenicBot = 0;
-
-            for (let i = 0; i < comparables.length; i++) {
-                if( currentValue > comparables[i] ){
-                    scenicBot++;
-                } else {
-                    break;
-                }
-            }
-
-            scenicScore.push( scenicBot );
 
         } else {
             scenicScore.push(0);
@@ -91,12 +72,43 @@ for (var row = 0; row < matrix.length; row++) {
             for (let i = 0; i < comparables.length; i++) {
                 if( currentValue > comparables[i] ){
                     scenicLeft++;
+                } else if( currentValue === comparables[i] ){
+                    scenicLeft++;
+                    break;
                 } else {
+                    scenicLeft++;
                     break;
                 }
             }
 
             scenicScore.push( scenicLeft );
+        } else {
+            scenicScore.push(0);
+        }
+
+        if( bottomCountable > 0 ){
+            comparables = [];
+
+            for (let i = row + 1; i <= row + bottomCountable; i++) {
+                comparables.push( parseInt( matrix[i][column] ) );
+            }
+
+            let scenicBot = 0;
+
+            for (let i = 0; i < comparables.length; i++) {
+                if( currentValue > comparables[i] ){
+                    scenicBot++;
+                } else if( currentValue === comparables[i] ){
+                    scenicBot++;
+                    break;
+                } else {
+                    scenicBot++;
+                    break;
+                }
+            }
+
+            scenicScore.push( scenicBot );
+
         } else {
             scenicScore.push(0);
         }
@@ -111,21 +123,26 @@ for (var row = 0; row < matrix.length; row++) {
             let scenicRight = 0;
             
             for (let i = 0; i < comparables.length; i++) {
+
                 if( currentValue > comparables[i] ){
                     scenicRight++;
+                } else if( currentValue === comparables[i] ){
+                    scenicRight++;
+                    break;
                 } else {
+                    scenicRight++;
                     break;
                 }
             }
 
             scenicScore.push( scenicRight );
+
         } else {
             scenicScore.push(0);
         }
 
-        // console.log( scenicScore.reduce((acc, curr) => acc * curr) );
-
         scenicMatrix[row][column] = scenicScore.reduce((acc, curr) => acc * curr);
+
     }
 }
 
