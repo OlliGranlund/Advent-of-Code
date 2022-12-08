@@ -309,7 +309,30 @@ function getParents(obj, key, parents = []) {
     return null;
   }
 
-const mappedFiles = getKeyInfo( tree );
+const uniqueObj = {};
+function makeKeyUnique(obj, parents = []) {
+    for (const [key, value] of Object.entries(obj)) {
+        const uniqueKey = `${key}^${parents.join("^")}`;
+        if (typeof value === "object") {
+            uniqueObj[uniqueKey] = {};
+            makeKeyUnique(value, parents.concat([key]));
+        } else {
+            uniqueObj[uniqueKey] = value;
+        }
+    }
+}
+
+// console.log( tree );
+makeKeyUnique( tree );
+// console.log( uniqueObj );
+
+let dirs = {};
+for(const key in uniqueObj){
+    console.log( key );
+    // console.log( uniqueObj[key] );
+}
+
+//const mappedFiles = getKeyInfo( tree );
 
 // console.log( tree );
 // console.log( tree );
@@ -317,6 +340,7 @@ const mappedFiles = getKeyInfo( tree );
 
 // console.log(  getParents( tree, 'e' ) );
 
+/*
 let folderValues = {};
 
 for (let i = 0; i < mappedFiles.length; i++){
@@ -336,6 +360,7 @@ for (let i = 0; i < mappedFiles.length; i++){
 }
 
 console.log( folderValues );
+*/
 
 //console.log( mappedFiles[0]['key'] );
 //console.log( getParentsOfKey( tree, mappedFiles[0]['key'] ) );
