@@ -4,7 +4,7 @@ const input = fs.readFileSync('input/08.txt', 'utf8');
 let matrix = input.split(/\n/);
 let maxValue = 0;
 
-for (var i = 0; i < matrix.length; i++) {
+for (let i = 0; i < matrix.length; i++) {
     matrix[i] = matrix[i].split('');
 }
 
@@ -13,8 +13,8 @@ let scenicMatrix = JSON.parse(JSON.stringify(matrix));
 const rowsCount = matrix.length - 1;
 const colsCount = matrix[0].length - 1;
 
-for (var row = 0; row < matrix.length; row++) {
-    for (var column = 0; column < matrix[row].length; column++) {
+for (let row = 0; row < matrix.length; row++) {
+    for (let column = 0; column < matrix[row].length; column++) {
         const currentValue = parseInt( matrix[row][column] );
         let comparables = [];
         let scenicScore = [];

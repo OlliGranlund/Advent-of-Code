@@ -1,5 +1,5 @@
 const fs = require('fs');
-const input = fs.readFileSync('input/07.txt', 'utf8');
+const input = fs.readFileSync('input/07_test.txt', 'utf8');
 const inputAsArray = input.split(/\r\n/); // start at root
 
 let tree = {};
