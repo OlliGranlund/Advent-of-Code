@@ -35,6 +35,8 @@ for (let i = 0; i < input.length; i++) {
 
     for (let m = 0; m < steps; m++) {
 
+        console.log( snake );
+
         // each snake movement
         for (let s = 0; s < snake.length; s++) {
 
@@ -75,11 +77,7 @@ for (let i = 0; i < input.length; i++) {
     }
 }
 
-console.log( tailPositionsInOrder );
-
 const tailPositions = tailPositionsInOrder.filter(( t={}, a=> !(t[a]=a in t) ));
-
-console.log( tailPositions );
 
 // not 3491
 // not 2626
