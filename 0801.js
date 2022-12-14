@@ -8,8 +8,6 @@ for (let i = 0; i < matrix.length; i++) {
     matrix[i] = matrix[i].split('');
 }
 
-console.log( matrix );
-
 const rowsCount = matrix.length - 1;
 const colsCount = matrix[0].length - 1;
 
