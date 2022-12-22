@@ -6,7 +6,6 @@ let cycle = 1;
 let value_x = 1;
 const addx_cycle = 2;
 
-const targetSignalStrenghts = [20,60,100,140,180,220];
 let sums = [];
 
 for (let i = 0; i < input.length; i++) {
@@ -25,7 +24,7 @@ for (let i = 0; i < input.length; i++) {
             }
 
             // check cycle status
-            if( targetSignalStrenghts.includes(cycle) ){
+            if( ( cycle + 20) % 40 === 0 ){
                 sums.push( cycle * value_x );
             }
         }
@@ -34,7 +33,7 @@ for (let i = 0; i < input.length; i++) {
         // noop
         cycle = cycle + 1;
 
-        if( targetSignalStrenghts.includes(cycle) ){
+        if( ( cycle + 20) % 40 === 0 ){
             sums.push( cycle * value_x );
         }
     }

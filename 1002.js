@@ -2,13 +2,31 @@ const fs = require('fs');
 const txt = fs.readFileSync('input/10.txt', 'utf8');
 const input = txt.split(/\n/);
 
-let cycle = 1;
+let cycle = 0;
 let value_x = 1;
 const addx_cycle = 2;
-const width = 40;
-const height = 6;
+let cyclePainting = '';
 
-let sums = [];
+// Close enough
+
+function updateCyclePainting( cycle, value_x, cyclePainting ){
+    if( 
+        cycle % 40 === value_x ||
+        cycle % 40 === value_x -1 ||
+        cycle % 40 === value_x +1
+    ){
+        cyclePainting = cyclePainting + '#';
+    } else {
+        cyclePainting = cyclePainting + '.';
+    }
+
+    if( cycle % 40 === 0 ){
+        console.log( cyclePainting );
+        cyclePainting = '';
+    }
+
+    return cyclePainting;
+}
 
 for (let i = 0; i < input.length; i++) {
 
@@ -25,20 +43,15 @@ for (let i = 0; i < input.length; i++) {
                 value_x = value_x + addx_value;
             }
 
-            // check cycle status
-            if( targetSignalStrenghts.includes(cycle) ){
-                sums.push( cycle * value_x );
-            }
+            // update sprite
+            cyclePainting = updateCyclePainting( cycle, value_x, cyclePainting );
         }
 
     } else {
         // noop
         cycle = cycle + 1;
 
-        if( targetSignalStrenghts.includes(cycle) ){
-            sums.push( cycle * value_x );
-        }
+        // update sprite
+        cyclePainting = updateCyclePainting( cycle, value_x, cyclePainting );
     }
 }
-
-console.log('1002: ' + sums.reduce((a, b) => a + b, 0) );
