@@ -59,5 +59,3 @@ for(let i = 0; i < spaceCount; i++){
 }
 
 console.log(`0901: ${calculateChecksum(buffer)}`);
-
-// 6288707484810 right

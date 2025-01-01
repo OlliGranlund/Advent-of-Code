@@ -110,18 +110,6 @@ Object.keys(antennas).forEach((antenna) => {
       }
     });
   });
-  /*
-
-  const node1 = antenna['];
-  const node2 = antenna[1];
-
-  const x = Math.abs(node1.x - node2.x);
-  const y = Math.abs(node1.y - node2.y);
-
-  const antiNode = { x: node1.x + x, y: node1.y + y, value: 'X' };
-
-  antiNodes.push(antiNode);
-  */
 });
 
 // clean antiNodes
@@ -152,5 +140,3 @@ map.forEach((node) => {
 renderDebug(mapWithAntiNodes);
 
 console.log(`0801: ${filteredAntiNodes.length}`);
-
-// 291 right

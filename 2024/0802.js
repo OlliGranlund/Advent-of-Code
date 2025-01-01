@@ -155,5 +155,3 @@ map.forEach((node) => {
 renderDebug(mapWithAntiNodes);
 
 console.log(`0801: ${filteredAntiNodes.length}`);
-
-// 291 right

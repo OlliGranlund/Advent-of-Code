@@ -110,10 +110,7 @@ const calculateFencePrice = (map, sections) => {
     return totalPrice;
 };
 
-// Example usage
 const floodSections = floodFill(origMap);
 const fencePrice = calculateFencePrice(origMap, floodSections);
 
 console.log(`1201: ${fencePrice}`);
-
-// 1359028 right

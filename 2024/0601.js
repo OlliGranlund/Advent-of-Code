@@ -102,5 +102,3 @@ for(let y = 0; y < yaxis; y++){
 
 console.log( debugLines );
 console.log(`0601: ${new Set(visitedSpots.map((spot) => JSON.stringify(spot))).size}`);
-
-// 5551 right

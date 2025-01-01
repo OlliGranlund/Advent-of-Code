@@ -64,13 +64,4 @@ Object.values(iteratedCounts).forEach((value) => {
     stoneCount += parseInt(value);
 });
 
-//console.log({iteratedCounts});
-//console.log({stoneCount});
-
-// console.log( Object.values(iteratedCounts).reduce((sum, count) => sum * count, 0) );
-
 console.log(`1102: ${Object.values(iteratedCounts).reduce((sum, count) => sum * count, 0)}`);
-
-// 610296462905 too low
-// 218811774248729 should be right
-// 47905878489544
